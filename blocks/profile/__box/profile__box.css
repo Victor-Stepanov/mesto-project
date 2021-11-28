@@ -1,0 +1,11 @@
+.profile__box {
+  max-width: 336px;
+  margin-right: auto;
+  padding: 0;
+}
+
+@media screen and (max-width: 766px) {
+  .profile__box {
+    margin: 0 auto;
+  }
+}

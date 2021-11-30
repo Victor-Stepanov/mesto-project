@@ -1,13 +1,13 @@
 .element__name {
-	margin: 0;
-	padding: 0;
-	color: #000;
-	font-weight: 900;
-	font-size: 24px;
-	line-height: 29px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	max-width: 198px;
-	/* Не нашел в figma значение width для имени, подгонял в ручную пока не появится Ч... */
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 198px;
+  /* Не нашел в figma значение width для имени, подгонял в ручную пока не появится Ч... */
 }

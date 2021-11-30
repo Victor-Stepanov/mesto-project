@@ -1,4 +1,6 @@
 .popup__container {
+  padding: 0;
+  margin: 0;
   width: 430px;
   min-height: 330px;
   /* min-height вроде можно использовать для заменя height? */

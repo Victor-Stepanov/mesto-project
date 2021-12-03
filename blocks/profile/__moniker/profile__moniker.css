@@ -22,6 +22,7 @@
 
 @media screen and (max-width: 766px) {
   .profile__moniker {
+    max-width: 282px;
     text-align: center;
     margin: 14px 0 0;
   }

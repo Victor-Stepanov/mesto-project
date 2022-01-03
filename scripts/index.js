@@ -2,35 +2,32 @@
 const popupProfile = document.querySelector(".popup_profile");
 const popupCard = document.querySelector(".popup_card");
 const popupImage = document.querySelector(".popup_image");
-//
-
-const profileCloseButton = document.querySelector(".popup__button-close");
-const buttonAddCard = document.querySelector(".profile__add-button");
 
 // section profile
 const sectionProfile = document.querySelector(".profile");
-const profileEditButton = sectionProfile.querySelector(".profile__edit-button");
+const editProfileButton = sectionProfile.querySelector(".profile__edit-button");
 const profileInfoName = sectionProfile.querySelector(".profile__name"); // h1 Имя
 const profileInfoAbout = sectionProfile.querySelector(".profile__moniker"); // p Профессия
+const addProfileButton = sectionProfile.querySelector(".profile__add-button");
 
 //
-const closeCard = popupCard.querySelector(".close-card");
-//const  cardNameInput = popupCard.querySelector('input[name="name-card"]');
-//const  cardLinkInput = popupCard.querySelector('input[name="link"]');
+const popupCardCloseButton = popupCard.querySelector(".close-card");
+const inputTitle = popupCard.querySelector('input[name="name-card"]');
+const inputLink = popupCard.querySelector('input[name="link"]');
 
 //
 const formElement = popupProfile.querySelector(".profile-form");
 const nameInput = formElement.querySelector('input[name="name"]');
 const jobInput = formElement.querySelector('input[name="about"]');
+const closeProfilePopupButton = popupProfile.querySelector(".close-profile");
 
 // Место для модального окна увеличения фото
-const popupFigure = popupImage.querySelector(".popup__figure")
+const popupFigure = popupImage.querySelector(".popup__figure");
 const popupImageBig = popupFigure.querySelector(".popup__figure-image");
 const popupFigcaption = popupFigure.querySelector(".popup__figure-figcaption");
 const buttonCloseImage = popupFigure.querySelector(".figure-close");
 //
 
-const popupShow = document.querySelector(".popup");
 const elementsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template").content;
 const initialCards = [
@@ -61,71 +58,78 @@ const initialCards = [
 ];
 
 // Блок работы с карточками
-function renderElement(element) {
+function createCard(item) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
   const cardTitle = cardElement.querySelector(".element__name");
-  const elementDeleteButton = cardElement.querySelector(".element__delete-button");
-  const elementLikeButton = cardElement.querySelector(".element__like-button");
-  cardImage.src = element.link;
-  cardImage.alt = element.name;
-  cardTitle.textContent = element.name;
-  elementsContainer.append(cardElement);
+  const deleteElementButton = cardElement.querySelector(
+    ".element__delete-button"
+  );
+  const likeElementButton = cardElement.querySelector(".element__like-button");
+  cardImage.src = item.link;
+  cardImage.alt = item.name;
+  cardTitle.textContent = item.name;
 
-  elementDeleteButton.addEventListener("click", (evt) => {
-    evt.target.closest(".element").remove();
-  });
-  elementLikeButton.addEventListener("click", (evt) => {
-    evt.target.classList.toggle("element__like-button_active");
-  });
+  deleteElementButton.addEventListener("click", (evt) =>
+    evt.target.closest(".element").remove()
+  );
+  likeElementButton.addEventListener("click", (evt) =>
+    evt.target.classList.toggle("element__like-button_active")
+  );
   cardImage.addEventListener("click", (evt) => {
     popupImageBig.src = evt.target.src;
     popupImageBig.alt = evt.target.alt;
     popupFigcaption.textContent = evt.target.alt;
-    popupOpen(popupImage);
+    openPopup(popupImage);
   });
-
   return cardElement;
 }
 
+const renderElement = (element) => {
+  const cardElement = createCard(element);
+  elementsContainer.append(cardElement);
+};
+
 // Блок работы с модальным окном профиля
 /**
- * popupOpen - открытие модального окна 
- * popupClose - закрытие модального окна 
+ * openPopup - открытие модального окна
+ * closePopup - закрытие модального окна
  */
-function popupOpen(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_opened");
 }
 
-function popupClose(popup) {
+function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
 
 // Блок работы с профилем
 /**
- * profileEditButton - Открылили модальное окно редактирование профиля,
- получили информацию об имени и професии
- * profileCloseButton - закрыли модальное окно без редактирования
- * popupProfile - Изменили информацию об имени и професии 
+ * editProfileButton - Открыли модальное окно редактирование профиля,
+ получили информацию об имени и профессии
+ * closeProfilePopupButton - закрыли модальное окно без редактирования
+ * popupProfile - Изменили информацию об имени и профессии
  */
-profileEditButton.addEventListener("click", () => {
+editProfileButton.addEventListener("click", () => {
   nameInput.value = profileInfoName.textContent;
   jobInput.value = profileInfoAbout.textContent;
-  popupOpen(popupProfile);
+  openPopup(popupProfile);
 });
-profileCloseButton.addEventListener("click", () => popupClose(popupProfile)); 
+closeProfilePopupButton.addEventListener("click", () =>
+  closePopup(popupProfile)
+);
 
 popupProfile.addEventListener("submit", (evt) => {
   evt.preventDefault();
   profileInfoName.textContent = nameInput.value;
   profileInfoAbout.textContent = jobInput.value;
-  popupClose(popupProfile);
-}); 
+  closePopup(popupProfile);
+});
 
 // Блок работы с карточками
 /**
- * buttonAddCard - Открыли модальное окно добавления карточки
- * closeCard - Закрыли модальное окно без добавления карточки
+ * addProfileButton - Открыли модальное окно добавления карточки
+ * popupCardCloseButton - Закрыли модальное окно без добавления карточки
  * const addNewCard - Ф-ция добавления новой карточки в начало имеющихся карточек, 
    используется объект newCard в который добавляются значение name, link полученные из полей формы.
  * popupCard - Добавили новую карточку
@@ -133,25 +137,23 @@ popupProfile.addEventListener("submit", (evt) => {
 
 const addNewCard = (evt) => {
   evt.preventDefault();
-  const inputTitle = popupCard.querySelector('input[name="name-card"]');
-  const inputLink = popupCard.querySelector('input[name="link"]');
   const newCard = { name: inputTitle.value, link: inputLink.value };
-  elementsContainer.prepend(renderElement(newCard));
-  popupClose(popupCard);
+  elementsContainer.prepend(createCard(newCard));
+  closePopup(popupCard);
 
   inputTitle.value = "";
   inputLink.value = "";
 };
 
-buttonAddCard.addEventListener("click", () => popupOpen(popupCard));
+addProfileButton.addEventListener("click", () => openPopup(popupCard));
 
-closeCard.addEventListener("click", () => popupClose(popupCard));
+popupCardCloseButton.addEventListener("click", () => closePopup(popupCard));
 
 popupCard.addEventListener("submit", addNewCard);
 
-// Закрытие модального окна увелеченного фото
+// Закрытие модального окна увеличенного фото
 
-buttonCloseImage.addEventListener("click", () => popupClose(popupImage));
+buttonCloseImage.addEventListener("click", () => closePopup(popupImage));
 
 // Рендер карточек
 initialCards.forEach(renderElement);

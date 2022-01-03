@@ -5,6 +5,7 @@
 * CSS
 * GRID
 * FLEX
+* JavaScript
 
 ### Обзор
 

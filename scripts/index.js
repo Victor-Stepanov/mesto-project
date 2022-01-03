@@ -61,7 +61,6 @@ const initialCards = [
 ];
 
 // Блок работы с карточками
-
 function renderElement(element) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
@@ -156,3 +155,5 @@ buttonCloseImage.addEventListener("click", () => popupClose(popupImage));
 
 // Рендер карточек
 initialCards.forEach(renderElement);
+
+// TODO: ...

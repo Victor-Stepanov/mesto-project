@@ -56,7 +56,7 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-
+const { log } = console;
 // Блок работы с карточками
 function createCard(item) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
@@ -102,6 +102,8 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
+
+
 
 // Блок работы с профилем
 /**
@@ -158,4 +160,14 @@ buttonCloseImage.addEventListener("click", () => closePopup(popupImage));
 // Рендер карточек
 initialCards.forEach(renderElement);
 
-// TODO: ...
+// TODO: Сделать ф-цию закрытия на оверлей
+
+function closePopupfromEsc(evt) {
+  if (evt.key === "Escape") {
+    const form = document.querySelectorAll('.popup');
+    form.forEach((item) => {closePopup(item)})
+  }
+
+};
+
+document.addEventListener('keydown', closePopupfromEsc);

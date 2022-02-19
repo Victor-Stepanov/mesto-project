@@ -103,8 +103,6 @@ function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
 
-
-
 // Блок работы с профилем
 /**
  * editProfileButton - Открыли модальное окно редактирование профиля,
@@ -160,14 +158,124 @@ buttonCloseImage.addEventListener("click", () => closePopup(popupImage));
 // Рендер карточек
 initialCards.forEach(renderElement);
 
-// TODO: Сделать ф-цию закрытия на оверлей
+// TODO: Сделать валидацию форм
 
 function closePopupfromEsc(evt) {
   if (evt.key === "Escape") {
-    const form = document.querySelectorAll('.popup');
-    form.forEach((item) => {closePopup(item)})
+    const form = document.querySelectorAll(".popup");
+    form.forEach((item) => {
+      closePopup(item);
+    });
   }
+}
 
+function closePopupfromOverlay(evt) {
+  if (evt.target.classList.contains("popup_opened")) {
+    closePopup(evt.target);
+  }
+}
+
+document.addEventListener("keydown", closePopupfromEsc);
+document.addEventListener("click", closePopupfromOverlay);
+
+// Блок с валидацие форм
+
+const validationConfig = {
+  formSelector: ".popup__form", // форма
+  inputSelector: ".popup__input", // инпуты
+  submitButtonSelector: ".popup__button", // кнопка
+  inactiveButtonClass: "popup__button_disabled", // не актив кнопка
+  inputErrorClass: "popup__input_type_error", // добавляем красную полоску
+  errorClass: "popup__input-error_active", //
 };
 
-document.addEventListener('keydown', closePopupfromEsc);
+const showInputError = (formElement, inputElement, errorMessage, config) => {
+  const errorElement = formElement.querySelector(
+    `.${inputElement.name}-input-error`
+  );
+  inputElement.classList.add(config.inputErrorClass); // add red line
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(config.errorClass);
+};
+
+const hideInputError = (formElement, inputElement, config) => {
+  const errorElement = formElement.querySelector(
+    `.${inputElement.name}-input-error`
+  );
+  inputElement.classList.remove(config.inputErrorClass); // add red line
+  errorElement.classList.remove(config.errorClass);
+  errorElement.textContent = "";
+};
+
+const isValid = (formElement, inputElement, config) => {
+  if (!inputElement.validity.valid) {
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      config
+    );
+  } else {
+    hideInputError(formElement, inputElement, config);
+  }
+};
+
+const disableButton = (buttonElement, config) => {
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.disabled = true;
+};
+
+const enableButton = (buttonElement, config) => {
+  buttonElement.classList.remove(config.inactiveButtonClass);
+  buttonElement.disabled = false;
+};
+
+// Ф-ция возвращает true если элемент не валид
+const hasInvalidInput = (inputList) =>
+  inputList.some((inputElement) => !inputElement.validity.valid);
+
+
+const toggleButtonState = (formElement, inputList, config) => {
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  hasInvalidInput(inputList) ? disableButton(buttonElement, config) : enableButton(buttonElement, config);
+ 
+};
+
+const setEventListeners = (formElement, config) => {
+  // Находим все поля внутри формы,
+  // сделаем из них массив методом Array.from
+  const inputList = Array.from(
+    formElement.querySelectorAll(config.inputSelector)
+  );
+
+  // Обойдём все элементы полученной коллекции
+  inputList.forEach((inputElement) => {
+    // каждому полю добавим обработчик события input
+    inputElement.addEventListener("input", () => {
+      // Внутри колбэка вызовем isValid,
+      isValid(formElement, inputElement, config);
+      toggleButtonState(formElement, inputList, config);
+    });
+  });
+};
+
+const enableValidation = (config) => {
+  // Найдём все формы с указанным классом в DOM,
+  // сделаем из них массив методом Array.from
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+  // Переберём полученную коллекцию
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      // У каждой формы отменим стандартное поведение
+      evt.preventDefault();
+    });
+
+    // Для каждой формы вызовем функцию setEventListeners,
+    // передав ей элемент формы
+    setEventListeners(formElement, config);
+  });
+};
+
+// Вызовем функцию
+enableValidation(validationConfig);

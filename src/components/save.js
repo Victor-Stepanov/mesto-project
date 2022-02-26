@@ -96,10 +96,12 @@ const renderElement = (element) => {
  * closePopup - закрытие модального окна
  */
 function openPopup(popup) {
+  document.addEventListener("keydown", closePopupfromEsc);
   popup.classList.add("popup_opened");
 }
 
 function closePopup(popup) {
+  document.removeEventListener("keydown", closePopupfromEsc);
   popup.classList.remove("popup_opened");
 }
 
@@ -175,7 +177,7 @@ function closePopupfromOverlay(evt) {
   }
 }
 
-document.addEventListener("keydown", closePopupfromEsc);
+
 document.addEventListener("click", closePopupfromOverlay);
 
 // Блок с валидацие форм
@@ -218,6 +220,15 @@ const isValid = (formElement, inputElement, config) => {
   } else {
     hideInputError(formElement, inputElement, config);
   }
+};
+
+function cleanInput(popup) {
+  const input = popup.querySelector('.popup__input_type_error');
+  const error = popup.querySelector('.popup__input-error_active');
+  input.forEach(element => element.classList.remove('.popup__input_type_error'));
+  error.forEach(element => element.classList.remove('.popup__input-error_active'));
+
+
 };
 
 const disableButton = (buttonElement, config) => {

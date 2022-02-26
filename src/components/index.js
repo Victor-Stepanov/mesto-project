@@ -15,8 +15,6 @@ import {
   buttonCloseImage,
 } from "./const.js";
 
-//Рендер карточек
-initialCards.forEach(renderElement);
 // Блок работы с профилем
 editProfileButton.addEventListener("click", editProfile);
 closeProfilePopupButton.addEventListener("click", () =>
@@ -31,5 +29,6 @@ popupCard.addEventListener("submit", addNewCard);
 buttonCloseImage.addEventListener("click", () => closePopup(popupImage));
 //close
 document.addEventListener("click", closePopupfromOverlay);
-
+//Рендер карточек
+initialCards.forEach(renderElement);
 enableValidation(validationConfig);

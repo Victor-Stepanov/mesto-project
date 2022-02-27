@@ -1,4 +1,3 @@
-mesto-project/.idea/*
-
+.idea/
 node_modules
 dist 

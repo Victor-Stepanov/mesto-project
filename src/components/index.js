@@ -1,3 +1,4 @@
+import '../pages/index.css';
 import { enableValidation } from "./validate.js";
 import { addNewCard, editProfile, sendProfile } from "./modal.js";
 import { openPopup, closePopup, closePopupfromOverlay } from "./utils.js";

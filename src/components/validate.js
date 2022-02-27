@@ -29,12 +29,8 @@ export const isValid = (formElement, inputElement, config) => {
 	}
 };
 
-export function cleanInput(popup) {
-	const input = popup.querySelector('.popup__input');
-	const error = popup.querySelector('.popup__input-error');
-	input.forEach(element => element.classList.remove('.popup__input_type_error'));
-	error.forEach(element => element.classList.remove('.popup__input-error_active'));
-
+export function cleanInputErrors() {
+	
 
 };
 

@@ -4,16 +4,12 @@ export function openPopup(popup) {
 }
 
 export function closePopup(popup) {
-  document.removeEventListener("keydown", closePopupfromEsc);
   popup.classList.remove("popup_opened");
 }
 
 export function closePopupfromEsc(evt) {
   if (evt.key === "Escape") {
-    const form = document.querySelectorAll(".popup");
-    form.forEach((item) => {
-      closePopup(item);
-    });
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 

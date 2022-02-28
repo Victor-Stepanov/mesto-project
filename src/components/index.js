@@ -29,7 +29,6 @@ popupCard.addEventListener("submit", addNewCard);
 // close image
 buttonCloseImage.addEventListener("click", () => closePopup(popupImage));
 //close
-document.addEventListener("click", closePopupfromOverlay);
 //Рендер карточек
 initialCards.forEach(renderElement);
 enableValidation(validationConfig);

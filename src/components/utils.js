@@ -1,9 +1,12 @@
 export function openPopup(popup) {
   document.addEventListener("keydown", closePopupfromEsc);
+  document.addEventListener("click", closePopupfromOverlay);
   popup.classList.add("popup_opened");
 }
 
 export function closePopup(popup) {
+  document.removeEventListener("keydown", closePopupfromEsc);
+  document.removeEventListener("click", closePopupfromOverlay);
   popup.classList.remove("popup_opened");
 }
 

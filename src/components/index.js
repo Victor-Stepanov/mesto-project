@@ -1,7 +1,7 @@
 import '../pages/index.css';
 import { enableValidation } from "./validate.js";
 import { addNewCard, editProfile, sendProfile } from "./modal.js";
-import { openPopup, closePopup, closePopupfromOverlay } from "./utils.js";
+import { openPopup, closePopup} from "./utils.js";
 import { renderElement } from "./card.js";
 import {
   initialCards,

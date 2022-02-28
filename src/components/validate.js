@@ -28,7 +28,7 @@ export const isValid = (formElement, inputElement, config) => {
 		hideInputError(formElement, inputElement, config);
 	}
 };
-
+// TODO : сделать ф-цию очистки полей
 export function cleanInputErrors() {
 	
 

@@ -31,7 +31,6 @@ export const isValid = (formElement, inputElement, config) => {
 // TODO : сделать ф-цию очистки полей
 export function cleanInputErrors() {
 	
-
 };
 
 export const disableButton = (buttonElement, config) => {

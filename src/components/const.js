@@ -16,14 +16,9 @@ export const jobInput = formElement.querySelector('input[name="about"]');// inpu
 export const closeProfilePopupButton = popupProfile.querySelector(".close-profile");// btn close
 
 
-
-
-//
 export const popupCardCloseButton = popupCard.querySelector(".close-card");
 export const inputTitle = popupCard.querySelector('input[name="name-card"]');
 export const inputLink = popupCard.querySelector('input[name="link"]');
-
-
 
 // Место для модального окна увеличения фото
 export const popupFigure = popupImage.querySelector(".popup__figure");
@@ -31,7 +26,6 @@ export const popupImageBig = popupFigure.querySelector(".popup__figure-image");
 export const popupFigcaption = popupFigure.querySelector(".popup__figure-figcaption");
 export const buttonCloseImage = popupFigure.querySelector(".figure-close");
 //
-
 export const elementsContainer = document.querySelector(".elements");
 export const cardTemplate = document.querySelector("#card-template").content;
 export const initialCards = [
@@ -62,13 +56,13 @@ export const initialCards = [
 ];
 
 export const validationConfig = {
-	formSelector: ".popup__form", // форма
-	inputSelector: ".popup__input", // инпуты
-	submitButtonSelector: ".popup__button", // кнопка
-	inactiveButtonClass: "popup__button_disabled", // не актив кнопка
-	inputErrorClass: "popup__input_type_error", // добавляем красную полоску
-	errorClass: "popup__input-error_active", //
-  };
+  formSelector: ".popup__form", // форма
+  inputSelector: ".popup__input", // инпуты
+  submitButtonSelector: ".popup__button", // кнопка
+  inactiveButtonClass: "popup__button_disabled", // не актив кнопка
+  inputErrorClass: "popup__input_type-error", // добавляем красную полоску
+  errorClass: "popup__input-error_active", //
+};
 
 
 

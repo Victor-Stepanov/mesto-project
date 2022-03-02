@@ -35,9 +35,9 @@ export const addNewCard = (evt) => {
   elementsContainer.prepend(createCard(newCard));
   evt.target.reset();
   closePopup(popupCard);
-  const form = document.querySelector('..popup_card')
-  const input = document.querySelector('.popup__input');
-  toggleButtonState(form, input, "popup__button_disabled");
+  const buttonElement = document.querySelector('.img');
+  buttonElement.classList.add('popup__button_disabled');
+  buttonElement.disabled = true;
 };
 
 export const openImage = (evt) => {

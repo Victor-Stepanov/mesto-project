@@ -1,5 +1,6 @@
 import { openPopup, closePopup } from "./utils.js";
 import { createCard } from "./card.js";
+import {toggleButtonState} from "./validate.js"
 import {
   inputLink,
   inputTitle,
@@ -32,10 +33,11 @@ export const addNewCard = (evt) => {
   evt.preventDefault();
   const newCard = { name: inputTitle.value, link: inputLink.value };
   elementsContainer.prepend(createCard(newCard));
+  evt.target.reset();
+  const form = document.querySelector('..popup_card')
+  const input = document.querySelector('.popup__input');
+  toggleButtonState(form, input, "popup__button_disabled");
   closePopup(popupCard);
-
-  inputTitle.value = "";
-  inputLink.value = "";
 };
 
 export const openImage = (evt) => {

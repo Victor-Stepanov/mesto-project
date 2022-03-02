@@ -34,10 +34,10 @@ export const addNewCard = (evt) => {
   const newCard = { name: inputTitle.value, link: inputLink.value };
   elementsContainer.prepend(createCard(newCard));
   evt.target.reset();
+  closePopup(popupCard);
   const form = document.querySelector('..popup_card')
   const input = document.querySelector('.popup__input');
   toggleButtonState(form, input, "popup__button_disabled");
-  closePopup(popupCard);
 };
 
 export const openImage = (evt) => {

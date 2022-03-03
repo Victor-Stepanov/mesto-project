@@ -60,7 +60,7 @@ export const setEventListeners = (formElement, config) => {
 	const inputList = Array.from(
 		formElement.querySelectorAll(config.inputSelector)
 	);
-
+	toggleButtonState(formElement, inputList, config);
 	// Обойдём все элементы полученной коллекции
 	inputList.forEach((inputElement) => {
 		// каждому полю добавим обработчик события input

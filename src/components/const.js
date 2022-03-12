@@ -1,6 +1,7 @@
 // Модальные окна
 export const popupCard = document.querySelector(".popup_card");
 export const popupImage = document.querySelector(".popup_image");
+export const popupUpdate = document.querySelector(".popup_update-photo");
 
 //Block work with profile
 export const sectionProfile = document.querySelector(".profile"); // section prifle
@@ -15,6 +16,12 @@ export const nameInput = formElement.querySelector('input[name="name"]');// inpu
 export const jobInput = formElement.querySelector('input[name="about"]');// input profile about/job
 export const closeProfilePopupButton = popupProfile.querySelector(".close-profile");// btn close
 
+//
+export const updatePhoto = document.querySelector('.profile__avatar');
+export const inputLinkPhoto = document.querySelector('input[name="link-photo"]');
+export const formSumbit = document.querySelector('form[name="new-photo"]')
+export const btnClose = document.querySelector('.update-close');
+//
 
 export const popupCardCloseButton = popupCard.querySelector(".close-card");
 export const inputTitle = popupCard.querySelector('input[name="name-card"]');
@@ -63,8 +70,14 @@ export const validationConfig = {
   inputErrorClass: "popup__input_type-error", // добавляем красную полоску
   errorClass: "popup__input-error_active", //
 };
-
-
-
+export const { log } = console;
+const token = '78c185d4-31af-42e6-8e64-c3782dbb21e3'
+export const config = {
+	baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
+	headers: {
+		authorization: token,
+		'Content-Type': 'application/json'
+	}
+}
 
 

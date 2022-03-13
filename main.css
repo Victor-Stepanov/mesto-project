@@ -14,7 +14,7 @@
 .profile__add-button{background-color:transparent;background-image:url(d86bb2edc2f6eadb96b7.svg);background-position:50%;background-repeat:no-repeat;border:2px solid #fff;border-radius:2px;box-sizing:border-box;cursor:pointer;height:50px;margin:0;padding:0;width:150px}.profile__add-button:hover{opacity:.6;transition:opacity .5s}@media screen and (max-width:766px){.profile__add-button{background-size:16px 16px;justify-content:center;width:282px}}
 .elements{box-sizing:border-box;display:grid;gap:17px 20px;grid-template-columns:repeat(3,282px);margin:0 auto;max-width:880px;padding:50px 0 66px}@media screen and (max-width:920px){.elements{gap:10px 15px;grid-template-columns:repeat(2,282px);justify-content:center}}@media screen and (max-width:630px){.elements{gap:20px 0;grid-template-columns:282px;padding-bottom:48px;padding-top:36px}}
 .element{background-color:#fff;border-radius:10px;box-sizing:border-box;margin:0;max-width:282px;overflow:hidden;padding:0;position:relative}
-.element__image{height:282px;-o-object-fit:cover;object-fit:cover;width:100%}
+.element__image{height:282px;-o-object-fit:cover;object-fit:cover;width:282px}.element__image:hover{cursor:pointer}
 .element__info{align-items:center;box-sizing:border-box;display:flex;justify-content:space-between;padding:25px 18px}
 .element__name{color:#000;font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:198px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}
 .element__like{display:flex;flex-direction:column}

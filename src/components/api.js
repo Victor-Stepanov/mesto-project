@@ -1,4 +1,4 @@
-import { log, config } from "./const.js"
+import { config } from "./const.js"
 
 // Проверяем статус запроса
 const checkStatus = (res) => {
@@ -13,7 +13,6 @@ export const getInfoAboutUser = () => {
 		headers: config.headers
 	})
 		.then(res => checkStatus(res))
-		.catch(err => log(err))
 }
 
 //4.Отправляем get запрос на получение карточек
@@ -22,7 +21,6 @@ export const getInitialCards = () => {
 		headers: config.headers
 	})
 		.then(res => checkStatus(res))
-		.catch((err) => log("Что-то пошло не так", err))
 }
 //6. Добавление новой карточки
 export const sendCardFromServer = (card) => {
@@ -36,34 +34,29 @@ export const sendCardFromServer = (card) => {
 
 	})
 		.then(res => checkStatus(res))
-		.catch(err => log("Ошибка", err))
 
 }
 
 //5. Редактирование профиля
-export const updateProfileInfo = (name, about) => {
+export const updateProfileInfo = ({name, about}) => {
 	return fetch(`${config.baseUrl}/users/me`, {
 		method: 'PATCH',
 		headers: config.headers,
 		body: JSON.stringify({
-			name: name,
-			about: about
+			name, about
 		})
 	})
 		.then(res => checkStatus(res))
-		.catch(err => log("Что-то пошло не так", err))
-
 };
 
 //10. Обновление аватара пользователя
-export const updateProfilePhoto = (avatar) => {
+export const updateProfilePhoto = ({ avatar }) => {
 	return fetch(`${config.baseUrl}/users/me/avatar`, {
 		method: 'PATCH',
 		headers: config.headers,
-		body: JSON.stringify({ avatar: avatar })
+		body: JSON.stringify({ avatar })
 	})
 		.then(res => checkStatus(res))
-		.catch(err => log("Что-то пошло не так", err))
 
 };
 //8. Удаление карточки
@@ -73,7 +66,6 @@ export const deleteCard = (cardId) => {
 		headers: config.headers,
 	})
 		.then((res) => checkStatus(res))
-		.catch((err) => log("Что-то пошло не так", err))
 
 }
 //9. Постановка лайка
@@ -83,7 +75,6 @@ export const addLikeCard = (cardId) => {
 		headers: config.headers,
 	})
 		.then((res) => checkStatus(res))
-		.catch((err) => log("Ошибка", err))
 
 }
 //9. Снятие лайка
@@ -93,5 +84,4 @@ export const removeLikeCard = (cardId) => {
 		headers: config.headers,
 	})
 		.then((res) => checkStatus(res))
-		.catch((err) => log("Что-то пошло не так", err))
 }

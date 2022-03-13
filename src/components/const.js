@@ -11,16 +11,16 @@ export const profileInfoAbout = sectionProfile.querySelector(".profile__moniker"
 export const addProfileButton = sectionProfile.querySelector(".profile__add-button"); // btn save/add
 //modal profile
 export const popupProfile = document.querySelector(".popup_profile");// modal
-export const formElement = popupProfile.querySelector(".profile-form");// form profile modal
-export const nameInput = formElement.querySelector('input[name="name"]');// input profile name
-export const jobInput = formElement.querySelector('input[name="about"]');// input profile about/job
+export const formProfileElement = popupProfile.querySelector(".profile-form");// form profile modal
+export const nameInput = formProfileElement.querySelector('input[name="name"]');// input profile name
+export const jobInput = formProfileElement.querySelector('input[name="about"]');// input profile about/job
 export const closeProfilePopupButton = popupProfile.querySelector(".close-profile");// btn close
 
 //
 export const updatePhoto = document.querySelector('.profile__avatar');
 export const inputLinkPhoto = document.querySelector('input[name="link-photo"]');
-export const formSumbit = document.querySelector('form[name="new-photo"]')
-export const btnClose = document.querySelector('.update-close');
+export const formPhotoElement = document.querySelector('form[name="new-photo"]')
+export const buttonCLoseUpdatePhoto = document.querySelector('.update-close');
 //
 
 export const popupCardCloseButton = popupCard.querySelector(".close-card");
@@ -32,6 +32,11 @@ export const popupFigure = popupImage.querySelector(".popup__figure");
 export const popupImageBig = popupFigure.querySelector(".popup__figure-image");
 export const popupFigcaption = popupFigure.querySelector(".popup__figure-figcaption");
 export const buttonCloseImage = popupFigure.querySelector(".figure-close");
+//Кнопки для работы
+export const buttonAddCard = document.querySelector(".img"); // addNewCardFromServer
+export const buttonEditProfile = document.querySelector(".edit"); // editProfile
+export const buttonEditProfilePhoto = document.querySelector(".send"); // editProfilePhoto
+
 //
 export const elementsContainer = document.querySelector(".elements");
 export const cardTemplate = document.querySelector("#card-template").content;
@@ -71,6 +76,7 @@ export const validationConfig = {
   errorClass: "popup__input-error_active", //
 };
 export const { log } = console;
+export const user = {};
 const token = '78c185d4-31af-42e6-8e64-c3782dbb21e3'
 export const config = {
 	baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',

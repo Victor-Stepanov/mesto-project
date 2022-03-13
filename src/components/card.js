@@ -4,8 +4,6 @@ import { openImage } from './modal.js'
 import { deleteCard, removeLikeCard, addLikeCard } from './api.js'
 
 
-
-
 export function createCard(element, userID) {
 	const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
 	const cardImage = cardElement.querySelector(".element__image");
@@ -14,7 +12,7 @@ export function createCard(element, userID) {
 		".element__delete-button"
 	);
 	const likeElementButton = cardElement.querySelector(".element__like-button");
-	const likeCounter = cardTemplate.querySelector(".element__like-counter")
+	const likeCounter = cardElement.querySelector(".element__like-counter")
 	// Присваеваем значения с сервера
 	const cardID = element._id;
 	cardImage.src = element.link;
@@ -22,9 +20,10 @@ export function createCard(element, userID) {
 	cardTitle.textContent = element.name;
 	likeCounter.textContent = element.likes.length; // длинна массива likes
 
+	
 	//Корзина появляется только для карточек владельца
-	if (userID !== element.owner._id) {
-		deleteElementButton.remove()
+	if (element.owner._id !== userID) {
+		deleteElementButton.remove();
 	}
 	//У карточек, которые лайкнул пользователь, будет активен лайк
 	element.likes.forEach((idx) => {
@@ -38,27 +37,27 @@ export function createCard(element, userID) {
 	deleteElementButton.addEventListener("click", (evt) => {
 		deleteCard(cardID)
 			.then((res) => {
-				evt.target.remove()
+				cardElement.remove()
 			})
 			.catch((err) => log("Что-то пошло не так", err))
 	}
 	);
 	//Проверяем есть ли у карточки лайк, если есть то удаляем, если нет добавляем
-	// Так же увеличиваем кол-во лайков 
+	// Так же увеличиваем/уменьшаем кол-во лайков 
 	likeElementButton.addEventListener("click", (evt) => {
 		if (evt.target.classList.contains("element__like-button_active")) {
 			removeLikeCard(cardID)
 				.then((res) => {
 					likeElementButton.classList.remove("element__like-button_active")
-					likeCounter.textContent = element.likes.length;
-
+					likeCounter.textContent = res.likes.length;
 				})
 				.catch((err) => log("Ошибка", err))
 		} {
 			addLikeCard(cardID)
 				.then((res) => {
 					likeElementButton.classList.add("element__like-button_active")
-					likeCounter.textContent = element.likes.length;
+					likeCounter.textContent = res.likes.length;
+					log(likeCounter.textContent)
 				})
 				.catch((err) => log("Ошибка", err))
 		}
@@ -72,6 +71,6 @@ export function createCard(element, userID) {
 export const renderElement = (element, userID) => {
 	const cardElement = createCard(element, userID);
 	elementsContainer.append(cardElement);
-};
+}
 
 
